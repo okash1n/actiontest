@@ -3,7 +3,7 @@ name: Format JSON and Merge to Main
 on:
   push:
     branches:
-      - dev # devブランチへのプッシュをトリガー
+      - dev
 
 jobs:
   format-and-merge:
@@ -26,9 +26,10 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "chore: Format JSON files"
-        branch: dev # 変更をdevブランチにコミット
-        commit_user_name: "github-actions[bot]"
-        commit_user_email: "github-actions[bot]@users.noreply.github.com"
+        branch: dev
+        commit_author: "okash1n <48118431+okash1n@users.noreply.github.com>"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Merge dev into main
       run: |
@@ -38,3 +39,5 @@ jobs:
         git checkout main
         git merge --no-ff dev -m "chore: Merge dev into main [auto-merge]"
         git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

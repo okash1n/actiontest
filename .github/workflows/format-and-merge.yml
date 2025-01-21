@@ -33,13 +33,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Merge dev into main
+    - name: Merge dev into main with conflict resolution
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git fetch origin main
         git checkout main
-        git merge --allow-unrelated-histories --no-ff dev -m "chore: Merge dev into main [auto-merge]"
+        git merge --strategy-option theirs --no-ff dev -m "chore: Merge dev into main [auto-merge]"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

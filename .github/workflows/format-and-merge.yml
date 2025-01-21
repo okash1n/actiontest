@@ -37,7 +37,7 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git fetch origin main
         git checkout main
-        git merge --no-ff dev -m "chore: Merge dev into main [auto-merge]"
+        git merge --allow-unrelated-histories --no-ff dev -m "chore: Merge dev into main [auto-merge]"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
